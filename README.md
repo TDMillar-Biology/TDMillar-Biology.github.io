@@ -119,17 +119,5 @@ colnames(summary_stats)<-c("Caretta caretta","Chelonia mydas")
 rownames(summary_stats)<-c("Min","First Quartile","Median","Third Quartile","Maximum")
 summary_stats
 
-## Let's look at how to deal with those outliers really quick
-## How can we filter the dataset for only those observations which are found
-## within our defined threshold?
-
-turtle_filter<-car.car[car.car$SCL > lowerbound & car.car$SCL < upperbound,]
-boxplot(turtle_filter$SCL)
-
-
-
-
-
-## Normal Distributions, Standard deviations
 
 

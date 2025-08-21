@@ -1,49 +1,276 @@
----
-layout: default
----
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Trevor Millar — Research & Projects</title>
+  <meta name="description" content="Researcher in genomics & computational biology. Structural variation, pangenomes, and functional genomics." />
+  <meta property="og:title" content="Trevor Millar — Research & Projects" />
+  <meta property="og:description" content="Genomics & computational biology: structural variation, pangenomes, functional genomics." />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#0ea5a4" />
+  <style>
+    :root {
+      --bg: #fcfcfc;
+      --text: #1f2937; /* slate-800 */
+      --muted: #6b7280; /* gray-500 */
+      --soft: #eef2f7;
+      --card: #ffffff;
+      --border: #e5e7eb;
+      --accent: #0ea5a4; /* teal-500 */
+      --accent-weak: #99f6e4; /* teal-100 */
+      --link: var(--accent);
+      --shadow: 0 1px 2px rgba(0,0,0,.06), 0 8px 20px rgba(2,24,43,.06);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0b1220; /* deep */
+        --text: #e5e7eb;
+        --muted: #9aa3b2;
+        --soft: #0f172a;
+        --card: #0f1929;
+        --border: #1f2937;
+        --link: #5eead4;
+        --accent: #14b8a6;
+        --accent-weak: #063b3a;
+        --shadow: 0 4px 16px rgba(0,0,0,.35);
+      }
+    }
+    html, body { height: 100%; }
+    body {
+      margin: 0; font: 16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Inter, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      background: var(--bg); color: var(--text);
+    }
+    /* Layout */
+    .wrap { max-width: 980px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+    header.site {
+      position: sticky; top: 0; z-index: 50;
+      backdrop-filter: saturate(180%) blur(12px);
+      background: color-mix(in oklab, var(--bg) 82%, transparent);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav {
+      display:flex; align-items:center; gap:1rem; justify-content:space-between;
+      max-width: 980px; margin: 0 auto; padding: .75rem 1.25rem;
+    }
+    .brand { display:flex; align-items:center; gap:.75rem; text-decoration:none; color:inherit; }
+    .brand .dot { width:12px; height:12px; border-radius:50%; background:var(--accent); box-shadow:0 0 0 4px color-mix(in oklab, var(--accent) 18%, transparent); }
+    .brand h1 { font-size: 1rem; margin:0; font-weight: 700; letter-spacing:.2px; }
+    nav a { color: var(--muted); text-decoration:none; font-weight:600; padding:.25rem .5rem; border-radius:.375rem; }
+    nav a:hover { color: var(--text); }
+    nav a.active { color: var(--link); background: color-mix(in oklab, var(--accent) 14%, transparent); }
+    .theme-btn { border:1px solid var(--border); background:var(--card); color:var(--muted); padding:.4rem .6rem; border-radius:.5rem; cursor:pointer; }
 
-<div class="posts">
-  {% for post in paginator.posts %}
-    <article class="post">
-      <a href="{{ site.baseurl }}{{ post.url }}">
-        <h1>{{ post.title }}</h1>
+    /* Hero */
+    .hero { display:grid; grid-template-columns: 120px 1fr; gap: 1.25rem; align-items:center; margin: 2rem 0; }
+    .avatar {
+      width: 120px; height:120px; border-radius: 20px; overflow:hidden; box-shadow: var(--shadow); border:1px solid var(--border);
+      background: linear-gradient(180deg, var(--accent-weak), transparent);
+      display:grid; place-items:center; font-size:42px; font-weight:800; color: color-mix(in oklab, var(--accent) 40%, var(--text));
+    }
+    .hero h2 { font-size: clamp(1.6rem, 2.2vw + 1rem, 2.4rem); line-height:1.15; margin:.25rem 0; }
+    .hero p { color: var(--muted); margin:.25rem 0 .5rem; }
+    .tags { display:flex; flex-wrap:wrap; gap:.5rem; }
+    .chip { background:var(--soft); color:var(--muted); border:1px solid var(--border); padding:.25rem .5rem; border-radius:.5rem; font-size:.85rem; }
 
-        <div>
-          <p class="post_date">{{ post.date | date: "%B %e, %Y" }}</p>
-        </div>
+    /* Sections */
+    section { padding: 2.25rem 0 0; border-top:1px dashed var(--border); }
+    section:first-of-type { border-top: none; }
+    h3 { font-size: 1.35rem; margin: 0 0 .75rem; }
+    .card { background: var(--card); border:1px solid var(--border); border-radius: 12px; padding: 1rem; box-shadow: var(--shadow); }
+    .grid { display:grid; gap:1rem; }
+    .grid.cols-2 { grid-template-columns: 1fr 1fr; }
+    @media (max-width: 800px) { .hero { grid-template-columns: 1fr; } .grid.cols-2 { grid-template-columns: 1fr; } }
+
+    /* Links */
+    a { color: var(--link); text-decoration: none; position: relative; }
+    a.uline:after { content:""; position:absolute; left:0; bottom:-2px; width:100%; height:2px; background: color-mix(in oklab, var(--link) 55%, transparent); transform: scaleX(0); transform-origin:left; transition: transform .25s ease; }
+    a.uline:hover:after { transform: scaleX(1); }
+
+    /* Lists */
+    ul.clean { list-style:none; padding-left: 0; margin:.25rem 0; }
+    ul.clean li { padding:.5rem .25rem; border-bottom:1px solid var(--border); }
+    ul.clean li:last-child { border-bottom:none; }
+    .pub { display:grid; gap:.25rem; }
+    .pub .meta { color: var(--muted); font-size:.95rem; }
+
+    /* Footer */
+    footer { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--border); color: var(--muted); font-size:.95rem; display:flex; justify-content:space-between; flex-wrap:wrap; gap:.75rem; }
+
+    /* Floating Top Button */
+    .topbtn { position: fixed; right: 1rem; bottom: 1rem; background: var(--accent); color: #002b29; border: none; border-radius: 999px; padding: .6rem .85rem; cursor: pointer; box-shadow: var(--shadow); }
+  </style>
+  <script>
+    // Theme toggle with persistence
+    const applyTheme = (mode) => {
+      document.documentElement.dataset.theme = mode;
+      localStorage.setItem('theme', mode);
+    };
+    const initTheme = () => {
+      const saved = localStorage.getItem('theme');
+      if (saved) applyTheme(saved);
+    };
+    document.addEventListener('DOMContentLoaded', () => {
+      initTheme();
+      const toggle = document.getElementById('theme-toggle');
+      toggle?.addEventListener('click', () => {
+        const next = (localStorage.getItem('theme') === 'light') ? 'dark' : 'light';
+        applyTheme(next);
+      });
+
+      // Active section highlighting
+      const navLinks = [...document.querySelectorAll('nav a[href^="#"]')];
+      const ids = navLinks.map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+      const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          const id = '#' + e.target.id;
+          const link = navLinks.find(a => a.getAttribute('href') === id);
+          if (!link) return;
+          if (e.isIntersecting) {
+            navLinks.forEach(a => a.classList.remove('active'));
+            link.classList.add('active');
+          }
+        })
+      }, { rootMargin: '-40% 0px -55% 0px', threshold: [0, .1, .5, 1]});
+      ids.forEach(el => obs.observe(el));
+
+      // Back to top
+      document.getElementById('to-top').addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+    });
+  </script>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Trevor Millar",
+      "jobTitle": "Computational Biologist / PhD Candidate",
+      "affiliation": {"@type":"CollegeOrUniversity","name":"Your Institution"},
+      "url": "https://your-domain.example",
+      "email": "mailto:you@example.com",
+      "sameAs": ["https://github.com/youruser", "https://scholar.google.com/citations?user=YOURID"]
+    }
+  </script>
+</head>
+<body>
+  <header class="site">
+    <div class="nav">
+      <a href="#top" class="brand" aria-label="Home">
+        <span class="dot" aria-hidden="true"></span>
+        <h1>Trevor Millar</h1>
       </a>
-      <div class="entry">
-        {{ post.excerpt }}
+      <nav>
+        <a href="#about">About</a>
+        <a href="#research">Research</a>
+        <a href="#publications">Publications</a>
+        <a href="#software">Software</a>
+        <a href="#teaching">Teaching</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <button id="theme-toggle" class="theme-btn" title="Toggle theme">🌗</button>
+    </div>
+  </header>
+
+  <main id="top" class="wrap">
+    <section class="hero" aria-label="Introduction">
+      <div class="avatar" aria-hidden="true">TM</div>
+      <div>
+        <h2>Genomics • Structural Variation • Pangenomes</h2>
+        <p>I'm a researcher working at the intersection of genome assembly, structural variant discovery, and functional genomics. I build tools and datasets to study how genome architecture shapes phenotype.</p>
+        <div class="tags">
+          <span class="chip">De novo assembly</span>
+          <span class="chip">Pangenome graphs</span>
+          <span class="chip">ATAC‑seq / RNA‑seq</span>
+          <span class="chip">Drosophila</span>
+        </div>
       </div>
+    </section>
 
-      <a href="{{ site.baseurl }}{{ post.url }}" class="read-more">Read More</a>
-    </article>
-  {% endfor %}
+    <section id="about">
+      <h3>About</h3>
+      <div class="card">
+        <p>My current work focuses on detecting and interpreting structural variants (SVs) in <em>Drosophila melanogaster</em>. I develop pipelines that integrate long‑read assemblies, whole‑genome alignments, and functional assays to connect SVs to chromatin accessibility and gene expression.</p>
+        <p>Beyond research, I mentor undergraduates, give seminars on pangenomes and reference bias, and tinker with clean, reproducible pipelines.</p>
+      </div>
+    </section>
 
-  <!-- pagination -->
-  {% if paginator.total_pages > 1 %}
-  <div class="pagination">
-    {% if paginator.previous_page %}
-      <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&laquo; Prev</a>
-    {% else %}
-      <span>&laquo; Prev</span>
-    {% endif %}
+    <section id="research">
+      <h3>Research</h3>
+      <div class="grid cols-2">
+        <article class="card">
+          <h4 style="margin:.25rem 0 .5rem">Reference bias and pangenome association mapping</h4>
+          <p class="muted">Using graph‑based representations to reduce bias and improve genotype‑phenotype association in the DGRP cohort.</p>
+        </article>
+        <article class="card">
+          <h4 style="margin:.25rem 0 .5rem">Structural variant calling from whole‑genome alignments</h4>
+          <p class="muted">SVMU 2.0: a MUMmer‑delta powered toolkit that calls SVs and produces publication‑ready plots for assemblies.</p>
+        </article>
+      </div>
+    </section>
 
-    {% for page in (1..paginator.total_pages) %}
-      {% if page == paginator.page %}
-        <span class="webjeda">{{ page }}</span>
-      {% elsif page == 1 %}
-        <a href="{{ '/' | prepend: site.baseurl | replace: '//', '/' }}">{{ page }}</a>
-      {% else %}
-        <a href="{{ site.paginate_path | prepend: site.baseurl | replace: '//', '/' | replace: ':num', page }}">{{ page }}</a>
-      {% endif %}
-    {% endfor %}
+    <section id="publications">
+      <h3>Selected Publications</h3>
+      <ul class="clean">
+        <li>
+          <div class="pub">
+            <strong>Breakpoints in context: assembly‑aware SV discovery for functional genomics</strong>
+            <span class="meta">Millar T., et al. (2025) — <em>bioRxiv</em>. <a class="uline" href="#">preprint</a> · <a class="uline" href="#">code</a></span>
+          </div>
+        </li>
+        <li>
+          <div class="pub">
+            <strong>Graph‑based association mapping in <em>Drosophila</em></strong>
+            <span class="meta">Millar T., et al. (2025) — In preparation.</span>
+          </div>
+        </li>
+      </ul>
+    </section>
 
-    {% if paginator.next_page %}
-      <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">Next &raquo;</a>
-    {% else %}
-      <span>Next &raquo;</span>
-    {% endif %}
-  </div>
-  {% endif %}
-</div>
+    <section id="software">
+      <h3>Software & Data</h3>
+      <div class="grid cols-2">
+        <div class="card">
+          <h4 style="margin-top:0">SVMU 2.0</h4>
+          <p>Detect structural variants from MUMmer <code>.delta</code> files and produce SV‑aware dotplots.</p>
+          <p><a class="uline" href="#">GitHub</a> · <a class="uline" href="#">Docs</a></p>
+        </div>
+        <div class="card">
+          <h4 style="margin-top:0">DeltaParser / BreakAsm</h4>
+          <p>Analyze whole‑genome alignments, diagnose misassemblies, and script corrective splits.</p>
+          <p><a class="uline" href="#">GitHub</a></p>
+        </div>
+      </div>
+    </section>
+
+    <section id="teaching">
+      <h3>Teaching & Talks</h3>
+      <div class="card">
+        <ul class="clean">
+          <li><strong>Intro to Python for Life Sciences</strong> — live‑coding session covering data wrangling and plotting.</li>
+          <li><strong>Pangenomes 101</strong> — seminar on graph genomes, mapping, and SV interpretation.</li>
+          <li><strong>ATAC‑seq workshop</strong> — practical wet‑lab & computational overview.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h3>Contact</h3>
+      <div class="card">
+        <p>Email: <a class="uline" href="mailto:you@example.com">you@example.com</a></p>
+        <p>
+          <a class="uline" href="https://github.com/youruser" target="_blank" rel="noopener">GitHub</a> ·
+          <a class="uline" href="https://scholar.google.com/citations?user=YOURID" target="_blank" rel="noopener">Google Scholar</a> ·
+          <a class="uline" href="#">CV (PDF)</a>
+        </p>
+      </div>
+    </section>
+
+    <footer>
+      <span>© <span id="y"></span> Trevor Millar</span>
+      <span>Built with vanilla HTML/CSS/JS • Deployed on GitHub Pages</span>
+    </footer>
+  </main>
+
+  <button id="to-top" class="topbtn" aria-label="Back to top">↑</button>
+  <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
+</body>
+</html>

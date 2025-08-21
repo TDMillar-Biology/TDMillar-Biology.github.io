@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Personal & Lifestyle — Trevor Millar</title>
+  <meta name="description" content="Personal notes, lifestyle experiments, and hobbies." />
+  <meta property="og:title" content="Personal & Lifestyle — Trevor Millar" />
+  <meta property="og:description" content="Personal notes, lifestyle experiments, and hobbies." />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#0ea5a4" />
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml" />
+  <style>
+    :root {
+      --bg: #fcfcfc; --text: #1f2937; --muted: #6b7280; --soft: #eef2f7;
+      --card: #ffffff; --border: #e5e7eb; --accent: #0ea5a4; --accent-weak: #99f6e4;
+      --link: var(--accent); --shadow: 0 1px 2px rgba(0,0,0,.06), 0 8px 20px rgba(2,24,43,.06);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0b1220; --text: #e5e7eb; --muted: #9aa3b2; --soft: #0f172a;
+        --card: #0f1929; --border: #1f2937; --link: #5eead4; --accent: #14b8a6; --accent-weak: #063b3a; --shadow: 0 4px 16px rgba(0,0,0,.35);
+      }
+    }
+    html, body { height: 100%; }
+    body { margin: 0; font: 16px/1.7 system-ui, -apple-system, Segoe UI, Roboto, Inter, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; background: var(--bg); color: var(--text);}  
+
+    /* Layout */
+    .wrap { max-width: 900px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+    header.site { position: sticky; top: 0; z-index: 50; backdrop-filter: saturate(180%) blur(12px); background: color-mix(in oklab, var(--bg) 82%, transparent); border-bottom: 1px solid var(--border); }
+    .nav { display:flex; align-items:center; gap:1rem; justify-content:space-between; max-width: 900px; margin: 0 auto; padding: .75rem 1.25rem; }
+    .brand { display:flex; align-items:center; gap:.75rem; text-decoration:none; color:inherit; }
+    .brand .dot { width:12px; height:12px; border-radius:50%; background:var(--accent); box-shadow:0 0 0 4px color-mix(in oklab, var(--accent) 18%, transparent); }
+    .brand h1 { font-size: 1rem; margin:0; font-weight: 700; letter-spacing:.2px; }
+    nav a { color: var(--muted); text-decoration:none; font-weight:600; padding:.25rem .5rem; border-radius:.375rem; }
+    nav a:hover { color: var(--text); }
+    nav a.active { color: var(--link); background: color-mix(in oklab, var(--accent) 14%, transparent); }
+    .theme-btn { border:1px solid var(--border); background:var(--card); color:var(--muted); padding:.4rem .6rem; border-radius:.5rem; cursor:pointer; }
+
+    /* Blog layout */
+    .page-title { margin: 1.25rem 0 .25rem; font-size: clamp(1.6rem, 2.2vw + 1rem, 2.4rem); }
+    .intro { color: var(--muted); margin: 0 0 1rem; }
+    .posts { display: grid; gap: 1rem; }
+    .post-card { background: var(--card); border:1px solid var(--border); border-radius: 12px; padding: 1.0rem 1.1rem; box-shadow: var(--shadow); }
+    .post-card h2 { margin: .25rem 0 .4rem; font-size: 1.25rem; }
+    .meta { color: var(--muted); font-size: .92rem; display:flex; gap:.5rem; flex-wrap:wrap; }
+    .tags { display:flex; flex-wrap:wrap; gap:.35rem; margin-top: .35rem; }
+    .chip { background:var(--soft); color:var(--muted); border:1px solid var(--border); padding:.15rem .45rem; border-radius:.5rem; font-size:.82rem; }
+    .prose { color: var(--text); }
+    .prose p { margin: .6rem 0; }
+
+    /* Article page styles (if you link to full posts later) */
+    .article { max-width: 72ch; margin: 0 auto; }
+
+    /* Footer */
+    footer { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--border); color: var(--muted); font-size:.95rem; display:flex; justify-content:space-between; flex-wrap:wrap; gap:.75rem; }
+  </style>
+  <script>
+    const applyTheme = (m) => { document.documentElement.dataset.theme = m; localStorage.setItem('theme', m); };
+    const initTheme = () => { const saved = localStorage.getItem('theme'); if (saved) applyTheme(saved); };
+    document.addEventListener('DOMContentLoaded', () => { initTheme(); });
+  </script>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Blog",
+      "name": "Personal & Lifestyle — Trevor Millar",
+      "url": "https://TDMillar-Biology.github.io/personal.html",
+      "author": { "@type": "Person", "name": "Trevor Millar" }
+    }
+  </script>
+</head>
+<body>
+  <header class="site">
+    <div class="nav">
+      <a href="index.html" class="brand" aria-label="Home">
+        <span class="dot" aria-hidden="true"></span>
+        <h1>Trevor Millar</h1>
+      </a>
+      <nav>
+        <a href="index.html#about">About</a>
+        <a href="index.html#research">Research</a>
+        <a href="index.html#publications">Publications</a>
+        <a href="index.html#software">Software</a>
+        <a href="index.html#teaching">Teaching</a>
+        <a href="#" class="active">Personal and Lifestyle</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+      <button class="theme-btn" onclick="applyTheme((localStorage.getItem('theme')==='light')?'dark':'light')">🌗</button>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <h1 class="page-title">Personal & Lifestyle</h1>
+    <p class="intro">Notes on training, cooking, cars, gear, and whatever I'm iterating on. Short posts, minimal fuss.</p>
+
+    <!-- Post index -->
+    <section class="posts" aria-label="Recent posts">
+      <article class="post-card">
+        <h2><a href="#">Sim Racing Setup on a Budget (2025)</a></h2>
+        <div class="meta"> <time datetime="2025-08-20">Aug 20, 2025</time> · 4 min read </div>
+        <div class="tags"><span class="chip">racing</span><span class="chip">hardware</span><span class="chip">diy</span></div>
+        <div class="prose">
+          <p>Testing mid‑range wheels and pedals; notes on used gear, ergonomics, and software tweaks that genuinely help lap consistency.</p>
+        </div>
+      </article>
+
+      <article class="post-card">
+        <h2><a href="#">Boxing Conditioning Block: 6 Weeks</a></h2>
+        <div class="meta"> <time datetime="2025-08-15">Aug 15, 2025</time> · 3 min read </div>
+        <div class="tags"><span class="chip">boxing</span><span class="chip">training</span></div>
+        <div class="prose">
+          <p>Intervals I actually stick to, heart‑rate targets, and how I combine bag work with strength days.</p>
+        </div>
+      </article>
+
+      <article class="post-card">
+        <h2><a href="#">Aquarium Log — Monte Carlo Carpet Rescue</a></h2>
+        <div class="meta"> <time datetime="2025-08-10">Aug 10, 2025</time> · 2 min read </div>
+        <div class="tags"><span class="chip">aquarium</span><span class="chip">plants</span></div>
+        <div class="prose">
+          <p>CO₂, flow, and trimming cadence that stopped the melt and brought back the green.</p>
+        </div>
+      </article>
+
+      <article class="post-card">
+        <h2><a href="#">Italian Weeknight Trio</a></h2>
+        <div class="meta"> <time datetime="2025-08-05">Aug 5, 2025</time> · 2 min read </div>
+        <div class="tags"><span class="chip">cooking</span><span class="chip">italian</span></div>
+        <div class="prose">
+          <p>Five‑ingredient Alfredo, a 20‑minute puttanesca, and a tiramisu shortcut that still tastes right.</p>
+        </div>
+      </article>
+    </section>
+
+    <!-- Simple pager (static for now) -->
+    <nav aria-label="Pagination" style="margin-top:1rem; display:flex; gap:.5rem;">
+      <a class="chip" href="#">← Newer</a>
+      <a class="chip" href="#">Older →</a>
+    </nav>
+
+    <footer>
+      <span>© <span id="y"></span> Trevor Millar</span>
+      <span><a href="/feed.xml">RSS</a> • <a href="index.html">Home</a></span>
+    </footer>
+  </main>
+  <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
+</body>
+</html>
